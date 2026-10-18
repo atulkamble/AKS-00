@@ -11,6 +11,17 @@ variables:
   webappPlan: 'ASP-myRG-89aa'
   serviceConnection: 'AzureWebAppServiceConnection2'  # Replace with your Azure service connection name
 
+
+stpes: Zip for WebApp
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(Build.SourcesDirectory)'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      replaceExistingArchive: true
+  
+  
 steps: 
   - task: AzureWebApp@1
     displayName: 'Deploy Flask App to Azure Web App'
