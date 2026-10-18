@@ -5,20 +5,15 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - task: Build ACR Docker Image@0
+  - task: AzureCLI@2
+    displayName: 'Build and push image to ACR'
     inputs:
       azureSubscription: 'Azure-DevOps'
-      azureContainerRegistry: 'atulkamble.azurecr.io'
-      imageName: 'flaskapp'
-      dockerfile: 'app/Dockerfile'
-      tags: |
-        $(Build.BuildId)
-
-  - task: Push Image to ACR
-    inputs:
-      azureSubscription: 'Azure-DevOps'
-      azureContainerRegistry: 'atulkamble.azurecr.io'
-      imageName: 'flaskapp'
-      tags: |
-        $(Build.BuildId)      
-
+      scriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: |
+        az acr build \
+          --registry atulkamble \
+          --image flaskapp:$(Build.BuildId) \
+          --file app/Dockerfile \
+          .
