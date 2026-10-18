@@ -5,11 +5,20 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - task: UsePythonVersion@0
+  - task: Build ACR Docker Image@0
     inputs:
-      versionSpec: '3.x'
+      azureSubscription: 'Azure-DevOps'
+      azureContainerRegistry: 'atulkamble.azurecr.io'
+      imageName: 'flaskapp'
+      dockerfile: 'app/Dockerfile'
+      tags: |
+        $(Build.BuildId)
 
-  - script: |
-      python -m pip install -r app/requirements.txt
-      python app/app.py
-    displayName: 'Install dependencies and run python code'
+  - task: Push Image to ACR
+    inputs:
+      azureSubscription: 'Azure-DevOps'
+      azureContainerRegistry: 'atulkamble.azurecr.io'
+      imageName: 'flaskapp'
+      tags: |
+        $(Build.BuildId)      
+
