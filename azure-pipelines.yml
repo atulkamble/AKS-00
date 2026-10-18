@@ -1,28 +1,39 @@
+
 trigger:
   - main
 
 pool:
   vmImage: 'ubuntu-latest'
 
-
 variables:
   webappName: 'mywebapp868'
-  webappRG: 'myRG'  
+  webappRG: 'myRG'
   webappPlan: 'ASP-myRG-89aa'
-  serviceConnection: 'AzureWebAppServiceConnection2'  # Replace with your Azure service connection name
+  serviceConnection: 'AzureWebAppServiceConnection2'
 
+steps:
+  # Step 1: Install Python dependencies for validation
+  - task: UsePythonVersion@0
+    displayName: 'Set up Python'
+    inputs:
+      versionSpec: '3.11'
 
-steps: Zip for WebApp
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install Flask Dependencies'
+
+  # Step 2: Create ZIP package
   - task: ArchiveFiles@2
+    displayName: 'ZIP Flask Web App'
     inputs:
       rootFolderOrFile: '$(Build.SourcesDirectory)'
       includeRootFolder: false
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
       replaceExistingArchive: true
-  
-  
-steps: 
+
+  # Step 3: Deploy to Azure App Service
   - task: AzureWebApp@1
     displayName: 'Deploy Flask App to Azure Web App'
     inputs:
@@ -31,4 +42,5 @@ steps:
       appName: '$(webappName)'
       resourceGroupName: '$(webappRG)'
       package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-
+      runtimeStack: 'PYTHON|3.11'
+      startUpCommand: 'gunicorn --bind=0.0.0.0:8000 app:app'
