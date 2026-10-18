@@ -43,4 +43,4 @@ steps:
       resourceGroupName: '$(webappRG)'
       package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
       runtimeStack: 'PYTHON|3.11'
-      startUpCommand: 'gunicorn --bind=0.0.0.0:5000 app:app'
+      startUpCommand: 'gunicorn --bind=0.0.0.0:8000 app:app'
