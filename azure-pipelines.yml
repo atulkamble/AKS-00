@@ -4,13 +4,20 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-  - task: Docker@2
-    displayName: 'Build and push image to ACR'
+
+variables:
+  webappName: 'mywebapp868'
+  webappRG: 'myRG'  
+  webappPlan: 'ASP-myRG-89aa'
+  serviceConnection: 'AzureWebAppServiceConnection2'  # Replace with your Azure service connection name
+
+steps: 
+  - task: AzureWebApp@1
+    displayName: 'Deploy Flask App to Azure Web App'
     inputs:
-      command: buildAndPush
-      containerRegistry: 'Azure-DevOps'
-      repository: 'flaskapp'
-      Dockerfile: '$(Build.SourcesDirectory)/app/Dockerfile'
-      buildContext: '$(Build.SourcesDirectory)/app'
-      tags: 'latest'
+      azureSubscription: '$(serviceConnection)'
+      appType: 'webAppLinux'
+      appName: '$(webappName)'
+      resourceGroupName: '$(webappRG)'
+      package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+
