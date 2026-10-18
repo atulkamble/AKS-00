@@ -12,18 +12,7 @@ variables:
   serviceConnection: 'AzureWebAppServiceConnection2'
 
 steps:
-  # Step 1: Install Python dependencies for validation
-  - task: UsePythonVersion@0
-    displayName: 'Set up Python'
-    inputs:
-      versionSpec: '3.11'
-
-  - script: |
-      python -m pip install --upgrade pip
-      pip install -r requirements.txt
-    displayName: 'Install Flask Dependencies'
-
-  # Step 2: Create ZIP package
+  # Step 1: Create ZIP package
   - task: ArchiveFiles@2
     displayName: 'ZIP Flask Web App'
     inputs:
@@ -33,7 +22,7 @@ steps:
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
       replaceExistingArchive: true
 
-  # Step 3: Deploy to Azure App Service
+  # Step 2: Deploy to Azure App Service
   - task: AzureWebApp@1
     displayName: 'Deploy Flask App to Azure Web App'
     inputs:
@@ -43,4 +32,4 @@ steps:
       resourceGroupName: '$(webappRG)'
       package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
       runtimeStack: 'PYTHON|3.11'
-      startUpCommand: 'gunicorn --bind=0.0.0.0:8000 app:app'
+      startUpCommand: 'gunicorn --bind=0.0.0.0:5000 app:app'
