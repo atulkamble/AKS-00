@@ -1,17 +1,15 @@
-trigger: 
+trigger:
   - main
 
-  pool:
-    vmImage: 'ubuntu-latest'
-  
-    steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '3.x'  
-        pythonVersion: '3.x'
+pool:
+  vmImage: 'ubuntu-latest'
 
-    - script: |
-        python -m venv venv
-        source venv/bin/activate
-        pip install -r requirements.txt 
-        python app.py
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'
+
+  - script: |
+      python -m pip install -r app/requirements.txt
+      python app/app.py
+    displayName: 'Install dependencies and run python code'
