@@ -13,5 +13,4 @@ steps:
       repository: 'flaskapp'
       Dockerfile: '$(Build.SourcesDirectory)/app/Dockerfile'
       buildContext: '$(Build.SourcesDirectory)/app'
-      tags: 
-        - 'latest'
+      tags: 'latest'
