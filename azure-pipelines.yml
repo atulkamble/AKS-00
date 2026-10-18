@@ -30,5 +30,5 @@ steps:
       appType: 'webAppLinux'
       appName: '$(webappName)'
       resourceGroupName: '$(webappRG)'
-      package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+      package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
 
