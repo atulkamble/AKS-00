@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: myapp-config
 data:
-  APP_ENV: "development"
+  APP_ENV: "dev"
   APP_NAME: "myapp"
