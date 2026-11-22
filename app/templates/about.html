@@ -1,3 +1,63 @@
-<h1>About Us</h1>
-<p>Welcome to Azure Training.</p>
-<a href="/">Back to Home</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>About | Azure Training</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="site-shell">
+        <nav class="navbar" aria-label="Primary navigation">
+            <div class="nav-inner">
+                <a class="brand" href="/" aria-label="Azure Training home">
+                    <span class="brand-mark">A</span>
+                    <span class="brand-name">Azure Training</span>
+                </a>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a class="active" href="/about">About</a>
+                    <a href="/contact">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <main class="container">
+            <section class="section-heading">
+                <p class="eyebrow">About the platform</p>
+                <h1>Practical training for <span class="gradient-text">modern platforms.</span></h1>
+                <p>
+                    Build confidence with Azure, containers, Kubernetes, and cloud-native
+                    workflows through clear examples and hands-on practice.
+                </p>
+            </section>
+
+            <section class="card-grid" aria-label="Platform topics">
+                <article class="card">
+                    <div class="card-icon">&#9729;</div>
+                    <h2>Azure Cloud</h2>
+                    <p>Learn cloud fundamentals, services, deployment patterns, and secure infrastructure.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">&#9881;</div>
+                    <h2>Kubernetes</h2>
+                    <p>Understand clusters, workloads, scaling, networking, and container orchestration.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">&#8599;</div>
+                    <h2>DevOps</h2>
+                    <p>Practice delivery pipelines, automation, monitoring, and reliable release workflows.</p>
+                </article>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-inner">
+                <span>Azure Training</span>
+                <span>Cloud learning, simplified.</span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

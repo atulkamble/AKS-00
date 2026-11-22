@@ -1,3 +1,67 @@
-<h1>Contact Us</h1>
-<p>Email: atul_kamble@hotmail.com</p>
-<a href="/">Back to Home</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>Contact | Azure Training</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="site-shell">
+        <nav class="navbar" aria-label="Primary navigation">
+            <div class="nav-inner">
+                <a class="brand" href="/" aria-label="Azure Training home">
+                    <span class="brand-mark">A</span>
+                    <span class="brand-name">Azure Training</span>
+                </a>
+                <div class="nav-links">
+                    <a href="/">Home</a>
+                    <a href="/about">About</a>
+                    <a class="active" href="/contact">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <main class="container">
+            <section class="contact-layout">
+                <div class="contact-panel">
+                    <p class="eyebrow">Get in touch</p>
+                    <h1>Let's start a <span class="gradient-text">conversation.</span></h1>
+                    <p>Questions about Azure training or the learning platform? Send a message and start the discussion.</p>
+                    <a class="email-link" href="mailto:atul_kamble@hotmail.com">atul_kamble@hotmail.com</a>
+                </div>
+
+                <form class="contact-card" action="mailto:atul_kamble@hotmail.com" method="post" enctype="text/plain">
+                    <div class="form-row">
+                        <div class="field">
+                            <label for="name">Name</label>
+                            <input id="name" name="name" type="text" placeholder="Your name" required>
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="subject">Subject</label>
+                        <input id="subject" name="subject" type="text" placeholder="How can we help?">
+                    </div>
+                    <div class="field">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your training goals..." required></textarea>
+                    </div>
+                    <button class="button primary" type="submit">Send message</button>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-inner">
+                <span>Azure Training</span>
+                <span>Cloud learning, simplified.</span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
